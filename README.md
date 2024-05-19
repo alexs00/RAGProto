@@ -13,7 +13,7 @@ graph TD;
     D --> E;
 ```
 
-When user uplodas a file it gets processed, indexed in vector database. When user asks 
+When user uploads a file it gets processed, indexed in vector database. When user asks 
 a question top N closest text chunks are picked up from the vector store. Then the application
 assesses if the provided chunks are relevant to the question and if yes, proceeds to generate
 an answer. If any of the documents is not relevant to the question the application
@@ -103,7 +103,7 @@ The notebook includes unit tests to ensure the correctness of the document index
     ```
 
 # Productizations considerations
-There numerour was the app can be improved and expanded to make it more robust:
+There is a number of ways the app can be improved and expanded to make it more robust:
 - Proper logging and unit tests
 - Separate app UI
 - File upload progress 
@@ -115,11 +115,11 @@ There numerour was the app can be improved and expanded to make it more robust:
 - Instead of "playing" with chunk sizes it would be more robust to use documents' structure for
 splitting, i.e. use sections as chunks
 - Think of potential problems like network partition and provide fallback options and 
-gracefull degradation functionality (use local simpler model for relevancy grading and 
-remote powerfull one for answer generation, fallback to local with a warning message
+graceful degradation functionality (use local simpler model for relevancy grading and 
+remote powerful one for answer generation, fallback to local with a warning message
 if remote is not accessible)
-- Potentially check final answer for halisinations
-- Use semantic ranking to improve the relevancy of retrived chunks
+- Potentially check final answer for hallucinations
+- Use semantic ranking to improve the relevancy of retrieved chunks
 
-There many imprvement options, however their prioritization depends on the concrete specific
+There many improvement options, however their prioritizations depends on the concrete specific
 use case being productized.
