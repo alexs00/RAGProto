@@ -33,9 +33,9 @@ refuses to answer saying there is not enough context retrived to generate the an
     docker run  -p 8888:8888 \
     -e AZURE_OPENAI_API_KEY='your_api_key' \
     -e AZURE_OPENAI_ENDPOINT='your_api_endpoint' \
-    -e AZURE_DEPLOYMENT_TEXTGEN='RAGProto' \
-    -e AZURE_DEPLOYMENT_EMBED='RAGProtoEmbed' \
-    -e AZURE_OPENAI_VERSION='2023-07-01-preview' \
+    -e AZURE_DEPLOYMENT_TEXTGEN='your_deployment_for_text_generation' \
+    -e AZURE_DEPLOYMENT_EMBED='your_deployment_for_embeddings' \
+    -e AZURE_OPENAI_VERSION='your_api_version' \
     --name ragproto -d rag_proto
     ```
     You can access the notebook navigating to http://127.0.0.1:8888/
@@ -66,8 +66,8 @@ Alternatively you can run it locally as follows
     ```dotenv
     AZURE_OPENAI_API_KEY=your_api_key
     AZURE_OPENAI_ENDPOINT=your_api_endpoint
-    AZURE_DEPLOYMENT_TEXTGEN=your_deployment_textgen
-    AZURE_DEPLOYMENT_EMBED=your_deployment_embed
+    AZURE_DEPLOYMENT_TEXTGEN=your_deployment_for_text_generation
+    AZURE_DEPLOYMENT_EMBED=your_deployment_for_embeddings
     AZURE_OPENAI_VERSION=your_api_version
     ```
 
