@@ -1,10 +1,9 @@
-```markdown
 # RAG-based Question Answering on PDF Files
 
 This repository contains an graph-based implementation of a Retrieval-Augmented Generation (RAG) system for answering questions based on user-uploaded PDF files. The notebook uses various tools and libraries to process PDF files, create embeddings, and generate answers using an OpenAI model.
 
 The decision logic is implemented as a graph shown below. 
-```
+
 ```mermaid
 graph TD;
     A[Retrieve relevant chunks] --> B{Grade chunks. All relevant?};
@@ -13,7 +12,7 @@ graph TD;
     C --> E[End];
     D --> E;
 ```
-```markdown
+
 When user uplodas a file it gets processed, indexed in vector database. When user asks 
 a question top N closest text chunks are picked up from the vector store. Then the application
 assesses if the provided chunks are relevant to the question and if yes, proceeds to generate
@@ -83,7 +82,7 @@ Alternatively you can run it locally as follows
 
 3. Follow the steps in the notebook to upload PDF files, split text, create embeddings, and perform question-answering.
 
-## Notebook Contents
+# Notebook Contents
 
 - **Initialization**: Imports necessary libraries and sets up environment variables.
 - **Model Setup**: Defines the language models and embedding models using Azure OpenAI services.
@@ -102,4 +101,25 @@ The notebook includes unit tests to ensure the correctness of the document index
     ```python
     !python -m unittest discover -s tests
     ```
-```
+
+# Productizations considerations
+There numerour was the app can be improved and expanded to make it more robust:
+- Proper logging and unit tests
+- Separate app UI
+- File upload progress 
+- File upload API
+  - Parallel file uploads
+  - Managing duplicate files
+  - Checking files for malicious content: executable code, prompt escaping attempts, etc
+  - Check for valid PDF structure
+- Instead of "playing" with chunk sizes it would be more robust to use documents' structure for
+splitting, i.e. use sections as chunks
+- Think of potential problems like network partition and provide fallback options and 
+gracefull degradation functionality (use local simpler model for relevancy grading and 
+remote powerfull one for answer generation, fallback to local with a warning message
+if remote is not accessible)
+- Potentially check final answer for halisinations
+- Use semantic ranking to improve the relevancy of retrived chunks
+
+There many imprvement options, however their prioritization depends on the concrete specific
+use case being productized.
