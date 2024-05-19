@@ -1,26 +1,29 @@
-# Start with the Python 3.9 image
-FROM python:3.10
+# Start with the Python image
+FROM python:3.12
 
-
-# Set the working directory to /Chatbot
+# Set the working directory
 WORKDIR /webapp
 
 
-# running requirements- requirements file provide all necessary library with version that could enable building up the docker
+# running requirements- requirements file provide all necessary library
+# with version that could enable building up the docker
 COPY requirements.txt .
 
 
 RUN pip install -r requirements.txt 
 
 
-# Copy the Python script generated from your notebook
-COPY webapp.py .
+# Copy the Python notebook
+COPY rag_proto.ipynb .
 
+COPY test/test_docs/guide_to_breeding_your_dog.pdf test_docs/guide_to_breeding_your_dog.pdf
+COPY test/test_docs/bad_pdf.pdf test_docs/bad_pdf.pdf
 
-# Expose the port Gradio will run on, assuming 7860 (default Gradio port)
-EXPOSE 7860
-EXPOSE 6333
-EXPOSE 1234
+# Expose the port Jupyter will run on
+EXPOSE 8888
+
+RUN jupyter notebook --generate-config
+RUN echo "c.NotebookApp.password='sha1:***'">>/root/.jupyter/jupyter_notebook_config.py
+
 # Command to run your Gradio app
-CMD ["python", "webapp.py"]
-
+CMD ["jupyter", "notebook", "rag_proto.ipynb", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
