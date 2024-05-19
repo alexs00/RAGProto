@@ -16,14 +16,11 @@ RUN pip install -r requirements.txt
 # Copy the Python notebook
 COPY rag_proto.ipynb .
 
-COPY test/test_docs/guide_to_breeding_your_dog.pdf test_docs/guide_to_breeding_your_dog.pdf
-COPY test/test_docs/bad_pdf.pdf test_docs/bad_pdf.pdf
+COPY test_docs/guide_to_breeding_your_dog.pdf test_docs/guide_to_breeding_your_dog.pdf
+COPY test_docs/bad_pdf.pdf test_docs/bad_pdf.pdf
 
 # Expose the port Jupyter will run on
 EXPOSE 8888
-
-RUN jupyter notebook --generate-config
-RUN echo "c.NotebookApp.password='sha1:***'">>/root/.jupyter/jupyter_notebook_config.py
 
 # Command to run your Gradio app
 CMD ["jupyter", "notebook", "rag_proto.ipynb", "--ip=0.0.0.0", "--no-browser", "--allow-root", "--NotebookApp.token=''", "--NotebookApp.password=''"]
