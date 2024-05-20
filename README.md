@@ -104,6 +104,7 @@ The notebook includes unit tests to ensure the correctness of the document index
 
 # Productizations considerations
 There is a number of ways the app can be improved and expanded to make it more robust:
+- Pydantic class for Azure API responses 
 - Proper logging and unit tests
 - Separate app UI
 - File upload progress 
