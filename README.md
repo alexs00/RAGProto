@@ -104,6 +104,7 @@ The notebook includes unit tests to ensure the correctness of the document index
 
 # Productizations considerations
 There is a number of ways the app can be improved and expanded to make it more robust:
+- Concurrency is not required for this use case. However, in other cases it needs to be taken care of. It is assumed that the the parallelization during inference will be handled by the platform/API (Azure in this case) and concurrency needs to be handled by the application: async/await/gather/etc.
 - Pydantic class for Azure API responses 
 - Proper logging and unit tests
 - Separate app UI
